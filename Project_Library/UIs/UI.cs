@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean_Code_Project
+namespace Project_Library.UIs
 {
-	public class UI
+	public class UI : IUI
 	{
 		public void Display(string message)
 		{

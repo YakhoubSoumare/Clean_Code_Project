@@ -1,4 +1,6 @@
 ﻿
+using Project_Library.UIs;
+
 namespace Clean_Code_Project
 {
 	public class StaticticsCollection
