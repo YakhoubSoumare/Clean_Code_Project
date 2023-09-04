@@ -14,7 +14,7 @@ namespace Project_Tests.Tests
 		public void Update_should_update_number_of_games()
 		{
 			//Arrange
-			PlayerData playerData = new PlayerData("yakhoub", 1);
+			var playerData = new PlayerData("yakhoub", 1);
 
 			//Act
 			playerData.Update(6);
@@ -27,7 +27,7 @@ namespace Project_Tests.Tests
 		public void Update_should_update_average()
 		{
 			//Arrange
-			PlayerData playerData = new PlayerData("yakhoub", 5);
+			var playerData = new PlayerData("yakhoub", 5);
 
 			//Act
 			playerData.Update(7);
@@ -40,7 +40,7 @@ namespace Project_Tests.Tests
 		public void Equals_should_match_name()
 		{
 			//Arrange
-			PlayerData playerData = new PlayerData("yakhoub", 5);
+			var playerData = new PlayerData("yakhoub", 5);
 			var comparedData = new PlayerData("yakhoub", 1);
 
 			//Act

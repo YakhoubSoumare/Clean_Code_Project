@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Project_Library.UIs;
+using Project_Library.Logic_And_Controller;
 
 namespace Clean_Code_Project
 {
 	public class GameController : IController
 	{
-		GameLogic game;
+		IGame game;
 		IUI ui;
 		IStatistics statistics;
 
@@ -20,7 +21,7 @@ namespace Clean_Code_Project
 		string resultOfRound;
 		string guessedValues;
 
-		public GameController(IUI ui, GameLogic game, IStatistics statistics)
+		public GameController(IUI ui, IGame game, IStatistics statistics)
 		{
 			this.ui = ui;
 			this.statistics = statistics;

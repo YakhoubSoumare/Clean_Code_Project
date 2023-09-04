@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean_Code_Project
+namespace Project_Library.Logic_And_Controller
 {
-	public class GameLogic
+	public class GameLogic : IGame
 	{
 		public string GameWon { get; private set; }
 
