@@ -3,11 +3,15 @@ using Project_Library.UIs;
 
 namespace Clean_Code_Project
 {
-	public class StaticticsCollection
+	public class StatisticsCollection : IStatistics
 	{
-		UI ui = new UI();
-		List<PlayerData> playerDataCollection = new List<PlayerData>();
-		public List<PlayerData> pPlayerDataCollection { get; private set; } //?
+		IUI ui;
+		List<PlayerData> playerDataCollection;
+		public StatisticsCollection(IUI ui)
+		{
+			this.ui = ui;
+			playerDataCollection = new List<PlayerData>();
+		}
 
 		public void Store(string name, int attempts)
 		{
@@ -19,15 +23,17 @@ namespace Clean_Code_Project
 		public void Show()
 		{
 			StreamReader streamReader = new StreamReader("result.txt");
+			playerDataCollection.Clear();
 
 			ReadStream(streamReader);
 			Sort(playerDataCollection);
 			ui.Display(string.Format("{0,-20}", "Player   games average"));
-			playerDataCollection.ForEach(playerData => 
+			playerDataCollection.ForEach(playerData =>
 				ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", playerData.Name, playerData.NumberOfGames, playerData.Average())));
-			
+
 			streamReader.Close();
 		}
+
 		void ReadStream(StreamReader streamReader)
 		{
 			string lineFromFile;
@@ -36,12 +42,16 @@ namespace Clean_Code_Project
 				string[] nameAndScore = lineFromFile.Split(new string[] { "#&#" }, StringSplitOptions.None);
 				string name = nameAndScore[0];
 				int guesses = Convert.ToInt32(nameAndScore[1]);
-				PlayerData playerData = GetPlayer(name);
-				playerData.Update(guesses);
-				if (!playerDataCollection.Contains(playerData))
+				int playerDataIndex = GetPlayerIndex(name);
+				if(playerDataIndex < 0)
 				{
-					playerDataCollection.Add(playerData);
+					playerDataCollection.Add(new PlayerData(name, guesses));
+					
 				}
+				else
+				{
+					playerDataCollection[playerDataIndex].Update(guesses);
+				}	
 			}
 		}
 
@@ -50,11 +60,10 @@ namespace Clean_Code_Project
 			playerDataCollection.Sort((player1, player2) => player1.Average().CompareTo(player2.Average()));
 		}
 
-		PlayerData GetPlayer(string name)
+		int GetPlayerIndex(string name)
 		{
 			int indexOfPlayerData = playerDataCollection.FindIndex(x => x.Name == name);
-			return (indexOfPlayerData > 1) ? 
-				playerDataCollection[indexOfPlayerData] : new PlayerData(name);
+			return indexOfPlayerData;
 		}
 	}
 }

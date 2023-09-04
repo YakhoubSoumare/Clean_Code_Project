@@ -7,24 +7,29 @@ using Project_Library.UIs;
 
 namespace Clean_Code_Project
 {
-	public class GameController
+	public class GameController : IController
 	{
-		GameLogic game = new GameLogic();
-		UI ui = new UI();
-		StaticticsCollection statistics = new StaticticsCollection();
+		GameLogic game;
+		IUI ui;
+		IStatistics statistics;
 
-		public bool PlayOn { get; private set; }
-
+		bool playOn;
 		string name;
 		string actualValues;
 		int attempts;
 		string resultOfRound;
 		string guessedValues;
 
+		public GameController(IUI ui, GameLogic game, IStatistics statistics)
+		{
+			this.ui = ui;
+			this.statistics = statistics;
+			this.game = game;
+		}
+
 		public void Run()
 		{
-			PlayOn = true;
-
+			playOn = true;
 			AskUserName();
 			Play();
 		}
@@ -36,79 +41,56 @@ namespace Clean_Code_Project
 			ui.Display(name);
 		}
 
-		public void Play()
+		void Play()
 		{
 			do
 			{
-				GenerateValues();
-				ui.Display("New game:\n");
-				ui.Display("For practice, number is: " + actualValues + "\n");
-
-				GuessUntilCorrect();
+				Start();
+				Guess();
 				SaveResult();
 				ShowTopList();
 				DisplaySuccess();
 				Continue();
-			} while (PlayOn);
+			} while (playOn);
 		}
 
-		public void Continue()
-		{
-			bool wantExit = CheckContinue();
-			PlayOn = !wantExit;
-		}
-
-		bool CheckContinue()
-		{
-			ui.Display("Continue ? ");
-			string answer = ui.Input();
-			return (answer != null && answer != "" && answer.Substring(0, 1) == "n");
-		}
-
-		void CheckAndDisplayResult(string actualValues, string guessedValues)
-		{
-			resultOfRound = game.Result(actualValues, guessedValues);
-			ui.Display(resultOfRound + "\n");
-		}
-
-		void GuessUntilCorrect()
-		{
-			do
-			{
-				Guess();
-				CheckAndDisplayResult(actualValues, guessedValues);
-			} while (!Correct());
-		}
-		bool Correct()
-		{
-			return (resultOfRound == game.GameWon);
-		}
-
-		void SaveResult()
-		{
-			statistics.Store(name, attempts);
-		}
-
-		void GenerateValues()
+		void Start()
 		{
 			actualValues = game.GenerateActualValues();
+			ui.Display("New game:\n");
+			ui.Display("For practice, number is: " + actualValues + "\n");
 		}
 
 		void Guess()
 		{
-			attempts++;
-			guessedValues = ui.Input();
-			ui.Display(guessedValues + "\n");
+			do
+			{
+				attempts++;
+				guessedValues = ui.Input();
+				ui.Display(guessedValues + "\n");
+				resultOfRound = game.Result(actualValues, guessedValues);
+				ui.Display(resultOfRound + "\n");
+			} while (!Correct());
 		}
+
+		void Continue()
+		{
+			ui.Display("Continue ? ");
+			string answer = ui.Input();
+			bool playStop = (answer != null && answer != "" && answer.Substring(0, 1) == "n");
+			playOn = !playStop;
+		}
+
+		bool Correct() 
+			=> (resultOfRound == game.GameWon);
+
+		void SaveResult()
+			=> statistics.Store(name, attempts);
 
 		void ShowTopList()
-		{
-			statistics.Show();
-		}
+			=> statistics.Show();
 
 		void DisplaySuccess()
-		{
-			ui.Display("Correct, it took " + attempts + " guesses");
-		}
+			=> ui.Display("Correct, it took " + attempts + " guesses");
 	}
 }

@@ -13,11 +13,11 @@ namespace Clean_Code_Project
 		int attemptsOfAllPlays;
 
 
-		public PlayerData(string name)
+		public PlayerData(string name, int attemptsOfAllPlays)
 		{
 			this.Name = name;
-			NumberOfGames = 0;
-			attemptsOfAllPlays = 0;
+			NumberOfGames = 1;
+			this.attemptsOfAllPlays = attemptsOfAllPlays;
 		}
 
 		public void Update(int guesses)
