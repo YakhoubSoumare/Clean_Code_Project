@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean_Code_Project
+namespace Project_Library.PlayerDatas
 {
 	public class PlayerData
 	{
