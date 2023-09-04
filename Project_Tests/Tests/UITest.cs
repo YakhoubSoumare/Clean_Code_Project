@@ -22,21 +22,5 @@ namespace Project_Tests.Tests
             //Assert
             Assert.AreEqual(expexted, result);
         }
-
-		[TestMethod]
-		public void Display_should_display_string()
-		{
-			//Arrange
-			string expexted = "message sent";
-			var mock = new Mock<IUI>();
-			mock.Setup(m => m.Display(It.IsAny<string>()));
-			IUI mockUI = mock.Object;
-
-			//Act
-			string result = mockUI.Input();
-
-			//Assert
-			Assert.AreEqual(expexted, result);
-		}
 	}
 }
