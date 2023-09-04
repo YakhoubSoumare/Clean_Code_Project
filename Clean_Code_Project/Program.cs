@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using Project_Library.UIs;
 
 namespace Clean_Code_Project
 {
@@ -9,7 +6,10 @@ namespace Clean_Code_Project
 	{
 		public static void Main(string[] args)
 		{
-			GameController gameController = new GameController();
+			IUI ui = new UI();
+			GameLogic game = new GameLogic();
+			IStatistics statistics = new StatisticsCollection(ui);
+			IController gameController = new GameController(ui, game, statistics);
 			gameController.Run();
 		}	
 	}
