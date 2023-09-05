@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Clean_Code_Project;
-using Moq;
+﻿using Moq;
 using Project_Library.Logic_And_Controller;
+using Project_Library.StatisticCollections;
 using Project_Library.UIs;
 
 namespace Project_Tests.Tests

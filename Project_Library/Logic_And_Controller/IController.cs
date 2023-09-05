@@ -1,4 +1,4 @@
-﻿namespace Clean_Code_Project
+﻿namespace Project_Library.Logic_And_Controller
 {
 	public interface IController
 	{

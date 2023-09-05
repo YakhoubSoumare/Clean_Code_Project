@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Project_Library.UIs;
-using Project_Library.Logic_And_Controller;
+﻿using Project_Library.UIs;
+using Project_Library.StatisticCollections;
 
-namespace Clean_Code_Project
+namespace Project_Library.Logic_And_Controller
 {
 	public class GameController : IController
 	{
@@ -79,7 +74,7 @@ namespace Clean_Code_Project
 		{
 			ui.Display("Continue ? ");
 			string answer = ui.Input();
-			bool playStop = (answer != null || answer != "" || answer.Substring(0, 1) == "n");
+			bool playStop = (answer == null || answer == "" || answer.Substring(0, 1) == "n");
 			playOn = !playStop;
 		}
 

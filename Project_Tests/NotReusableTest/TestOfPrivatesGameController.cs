@@ -1,14 +1,14 @@
 ﻿//As this is not what unit test is all about but it helped me!
 
-	using Moq;
-using Clean_Code_Project;
+using Moq;
 using Project_Library.UIs;
 using Project_Library.Logic_And_Controller;
 using System.Reflection;
+using Project_Library.StatisticCollections;
 
 namespace Project_Tests.NotReusableTest
 {
-	[TestClass]
+    [TestClass]
     public class TestOfPrivatesGameController
     {
         Mock<IUI> uiObject;

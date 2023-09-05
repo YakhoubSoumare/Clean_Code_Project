@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Project_Library.PlayerDatas;
+﻿using Project_Library.PlayerDatas;
 
 namespace Project_Tests.Tests
 {
@@ -18,9 +13,11 @@ namespace Project_Tests.Tests
 
 			//Act
 			playerData.Update(6);
+			int expected = 2;
+			int actual = playerData.NumberOfGames;
 
 			//Assert
-			Assert.AreEqual(2, playerData.NumberOfGames);
+			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -31,9 +28,11 @@ namespace Project_Tests.Tests
 
 			//Act
 			playerData.Update(7);
+			double expected = 6;
+			double actual = playerData.Average();
 
 			//Assert
-			Assert.AreEqual(6, playerData.Average());
+			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -44,10 +43,10 @@ namespace Project_Tests.Tests
 			var comparedData = new PlayerData("yakhoub", 1);
 
 			//Act
-			bool expected = playerData.Equals(comparedData);
+			bool actual = playerData.Equals(comparedData);
 
 			//Assert
-			Assert.IsTrue(expected);
+			Assert.IsTrue(actual);
 		}
 	}
 }

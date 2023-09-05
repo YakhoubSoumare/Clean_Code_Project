@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
+﻿using Moq;
 using Project_Library.Logic_And_Controller;
 
 namespace Project_Tests.Tests
@@ -18,10 +13,11 @@ namespace Project_Tests.Tests
 			var game = new GameLogic();
 
 			//Act
-			string expected = game.GameWon;
+			string expected = "BBBB,";
+			string actual = game.GameWon;
 
 			//Assert
-			Assert.AreEqual("BBBB,", game.GameWon);
+			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -37,9 +33,10 @@ namespace Project_Tests.Tests
 			string passedActual = mock.Object.GenerateActualValues();
 			string passedGuessed = "2397";
 			string expected = ",C";
+			string actual = game.Result(passedActual, passedGuessed);
 
 			//Assert
-			Assert.AreEqual(expected, game.Result(passedActual, passedGuessed));
+			Assert.AreEqual(expected, actual);
 		}
 	}
 }

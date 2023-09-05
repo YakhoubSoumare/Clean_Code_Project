@@ -17,10 +17,10 @@ namespace Project_Tests.Tests
             IUI mockUI = mock.Object;
 
             //Act
-            string result = mockUI.Input();
+            string actual = mockUI.Input();
 
             //Assert
-            Assert.AreEqual(expexted, result);
+            Assert.AreEqual(expexted, actual);
         }
 	}
 }
