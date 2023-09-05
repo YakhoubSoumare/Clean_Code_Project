@@ -31,11 +31,11 @@ namespace Clean_Code_Project
 		public void Run()
 		{
 			playOn = true;
-			AskUserName();
+			AskAndDisplayUserName();
 			Play();
 		}
 
-		void AskUserName()
+		void AskAndDisplayUserName()
 		{
 			ui.Display("Enter your user name:\n");
 			name = ui.Input();
@@ -44,6 +44,7 @@ namespace Clean_Code_Project
 
 		void Play()
 		{
+			
 			do
 			{
 				Start();
@@ -78,7 +79,7 @@ namespace Clean_Code_Project
 		{
 			ui.Display("Continue ? ");
 			string answer = ui.Input();
-			bool playStop = (answer != null && answer != "" && answer.Substring(0, 1) == "n");
+			bool playStop = (answer != null || answer != "" || answer.Substring(0, 1) == "n");
 			playOn = !playStop;
 		}
 

@@ -9,6 +9,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project_Library\Project_Library.csproj" />
+
+	  <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+		  <_Parameter1>Project_Tests</_Parameter1>
+	  </AssemblyAttribute>
   </ItemGroup>
 
 </Project>
