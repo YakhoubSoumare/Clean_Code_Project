@@ -4,12 +4,12 @@ using Project_Library.UIs;
 
 namespace Project_Library.StatisticCollections
 {
-	public class StatisticsCollection : IStatistics
+	public class StatisticCollection : IStatistics
 	{
 		IUI ui;
 		internal List<PlayerData> PlayerDataCollection { get; private set; }
 		IFileManager fileManager;
-		public StatisticsCollection(IUI ui, IFileManager fileManager)
+		public StatisticCollection(IUI ui, IFileManager fileManager)
 		{
 			this.ui = ui;
 			PlayerDataCollection = new List<PlayerData>();
