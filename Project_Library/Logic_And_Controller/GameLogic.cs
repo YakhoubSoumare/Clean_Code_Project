@@ -19,16 +19,15 @@ namespace Project_Library.Logic_And_Controller
 		{
 			Random randomGenerator = new Random();
 			string actualValues = "";
-			for (int i = 0; i < 4; i++)
+			HashSet<int> generated = new HashSet<int>();
+			while (generated.Count < 4)
 			{
-				int random = randomGenerator.Next(10);
-				string randomDigit = "" + random;
-				while (actualValues.Contains(randomDigit))
-				{
-					random = randomGenerator.Next(10);
-					randomDigit = "" + random;
-				}
-				actualValues = actualValues + randomDigit;
+				generated.Add(randomGenerator.Next(10));
+			}
+			
+			foreach(var digit in generated)
+			{
+				actualValues += digit.ToString();
 			}
 			return actualValues;
 		}
