@@ -10,7 +10,7 @@ namespace Project_Tests.Tests
 		public void Constructor_should_set_certain_string_to_GameWon_Property()
 		{
 			//Arrange
-			var game = new GameLogic();
+			var game = new MooGame();
 
 			//Act
 			string expected = "BBBB,";
@@ -24,15 +24,34 @@ namespace Project_Tests.Tests
 		public void Result_should_correct_handle_guessed_values()
 		{
 			//Arrange
-			var mock = new Mock<IGame>();
-			mock.Setup(r => r.GenerateActualValues()).Returns("1438");
-			var game = new GameLogic();
+			var game = new MooGame();
+			var mock = new Mock<IGameLogic>();
+			
+			if(game.GetType() == typeof(MooGame))
+			{
+				mock.Setup(r => r.GenerateActualValues()).Returns("1438");
+			}
+			else if(game.GetType() == typeof(SecondGame))
+			{
+				mock.Setup(r => r.GenerateActualValues()).Returns("143868");
+			}
 
 
 			//Act
+			string passedGuessed = "";
+			string expected = "";
 			string passedActual = mock.Object.GenerateActualValues();
-			string passedGuessed = "2397";
-			string expected = ",C";
+			if (game.GetType() == typeof(MooGame))
+			{
+				passedGuessed = "2397";
+				expected = ",C";
+			}
+			else if (game.GetType() == typeof(SecondGame))
+			{
+				passedGuessed = "239789";
+				expected = ",CC";
+			}
+
 			string actual = game.Result(passedActual, passedGuessed);
 
 			//Assert

@@ -1,6 +1,6 @@
 ﻿namespace Project_Library.Logic_And_Controller
 {
-	public interface IGame
+	public interface IGameLogic
 	{
 		string GameWon { get; }
 

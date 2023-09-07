@@ -12,14 +12,14 @@ namespace Project_Tests.NotReusableTest
     public class TestOfPrivatesGameController
     {
         Mock<IUI> uiObject;
-        Mock<IGame> gameObject;
+        Mock<IGameLogic> gameObject;
         Mock<IStatistics> statisticsObject;
 
         [TestInitialize]
         public void Initialize()
         {
             uiObject = new Mock<IUI>();
-            gameObject = new Mock<IGame>();
+            gameObject = new Mock<IGameLogic>();
             statisticsObject = new Mock<IStatistics>();
         }
 

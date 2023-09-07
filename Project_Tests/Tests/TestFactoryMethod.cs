@@ -58,7 +58,7 @@ namespace Project_Tests.Tests
 			var created = creator.CreateGameLogic();
 
 			//Act
-			var expected = typeof(GameLogic);
+			var expected = typeof(MooGame);
 			var actual = created.GetType();
 
 			//Assert
@@ -86,7 +86,7 @@ namespace Project_Tests.Tests
 		{
 			//Arrange
 			var ui = new Mock<IUI>();
-			var game = new Mock<IGame>();
+			var game = new Mock<IGameLogic>();
 			var statistics = new Mock<IStatistics>();
 			var created = creator.CreateController(ui.Object, game.Object, statistics.Object);
 

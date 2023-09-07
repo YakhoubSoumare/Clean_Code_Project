@@ -5,7 +5,7 @@ namespace Project_Library.Logic_And_Controller
 {
 	public class GameController : IController
 	{
-		IGame game;
+		IGameLogic game;
 		IUI ui;
 		IStatistics statistics;
 
@@ -16,7 +16,7 @@ namespace Project_Library.Logic_And_Controller
 		string resultOfRound;
 		string guessedValues;
 
-		public GameController(IUI ui, IGame game, IStatistics statistics)
+		public GameController(IUI ui, IGameLogic game, IStatistics statistics)
 		{
 			this.ui = ui;
 			this.statistics = statistics;

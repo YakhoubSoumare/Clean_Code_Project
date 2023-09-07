@@ -9,19 +9,21 @@ namespace Project_Tests.Tests
 	public class GameControllerTest
 	{
 		[TestMethod]
-		public void Run_should_use_all_once_functions_given_the_right_values()
+		public void Run_should_use_all_once_functions_given_the_right_gameWon_value()
 		{
+			
 			//Arrange
 			var uiObject = new Mock<IUI>();
 			uiObject.Setup(o => o.Input()).Returns(It.IsAny<string>());
 
-			var gameObject = new Mock<IGame>();
-			gameObject.Setup(o => o.GenerateActualValues()).Returns("4365");
-			gameObject.Setup(o => o.GameWon).Returns("BBBB,");
+			var gameObject = new Mock<IGameLogic>();
+			gameObject.Setup(o => o.GenerateActualValues()).Returns(It.IsAny<string>);
+			string gameWon = "BBBB,";
+			gameObject.Setup(o => o.GameWon).Returns(gameWon);
 			gameObject.SetupSequence(o => o.Result(It.IsAny<string>(), It.IsAny<string>()))
 				.Returns("No Success")
 				.Returns("No Success")
-				.Returns("BBBB,");
+				.Returns(gameWon);
 
 			var statisticsObject = new Mock<IStatistics>();
 			

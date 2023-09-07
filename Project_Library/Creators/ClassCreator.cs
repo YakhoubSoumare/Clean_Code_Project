@@ -13,7 +13,7 @@ namespace Project_Library.Creators
 {
 	public class ClassCreator : ICreator
 	{
-		public IController CreateController(IUI ui, IGame game, IStatistics statistics)
+		public IController CreateController(IUI ui, IGameLogic game, IStatistics statistics)
 		{
 			return new GameController(ui, game, statistics);
 		}
@@ -23,9 +23,10 @@ namespace Project_Library.Creators
 			return new FileManager(path);
 		}
 
-		public IGame CreateGameLogic()
+		public IGameLogic CreateGameLogic()
 		{
-			return new GameLogic();
+			return new MooGame();
+			//return new SecondGame();
 		}
 
 		public PlayerData CreatePlayerData(string name, int attemptsOfAllPlays)
