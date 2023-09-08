@@ -1,5 +1,6 @@
 ﻿using Project_Library.UIs;
 using Project_Library.StatisticCollections;
+using Project_Library.Creators;
 
 namespace Project_Library.Logic_And_Controller
 {
@@ -45,7 +46,6 @@ namespace Project_Library.Logic_And_Controller
 
 		void Play()
 		{
-			
 			do
 			{
 				attempts = 0;
@@ -83,6 +83,10 @@ namespace Project_Library.Logic_And_Controller
 			string answer = ui.Input();
 			bool playStop = (answer == null || answer == "" || answer.Substring(0, 1) == "n");
 			playOn = !playStop;
+			if(playOn is true)
+			{
+				CheckGameSwitch();
+			}
 		}
 
 		bool Correct() 
@@ -96,5 +100,17 @@ namespace Project_Library.Logic_And_Controller
 
 		void DisplaySuccess()
 			=> ui.Display("Correct, it took " + attempts + " guesses");
+
+		void CheckGameSwitch()
+		{
+			ui.Display("Switch Game ? \"n or Enter-key for no\" || \"any other-key for yes\"");
+			string answer = ui.Input();
+			bool stayCurrentGame = (answer == null || answer == "" || answer.Substring(0, 1) == "n");
+			if(!stayCurrentGame)
+			{
+				IGameLogic game = ClassCreator.CreateSecondGame();
+				SetGame(game);
+			}
+		}
 	}
 }

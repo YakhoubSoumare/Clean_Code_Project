@@ -12,22 +12,14 @@ using Project_Library.UIs;
 namespace Project_Tests.Tests
 {
 	[TestClass]
-	public class TestFactoryMethod
+	public class TestFactoryPattern
 	{
-		ICreator creator;
-
-		[TestInitialize]
-		public void Initialize()
-		{
-			creator = new ClassCreator();
-		}
-
 		[TestMethod]
 		public void FileManager_should_return_FileManager()
 		{
 			string path = "";
 			//Arrange
-			var created = creator.CreateFileManager(path);
+			var created = ClassCreator.CreateFileManager(path);
 
 			//Act
 			var expected = typeof(FileManager);
@@ -41,7 +33,7 @@ namespace Project_Tests.Tests
 		public void UI_should_return_UI()
 		{
 			//Arrange
-			var created = creator.CreateUI();
+			var created = ClassCreator.CreateUI();
 
 			//Act
 			var expected = typeof(UI);
@@ -55,7 +47,7 @@ namespace Project_Tests.Tests
 		public void CreateMooGame_should_return_GameLogic()
 		{
 			//Arrange
-			var created = creator.CreateMooGame();
+			var created = ClassCreator.CreateMooGame();
 
 			//Act
 			var expected = typeof(MooGame);
@@ -69,7 +61,7 @@ namespace Project_Tests.Tests
 		public void CreateSecondGame_should_return_SecondGame()
 		{
 			//Arrange
-			var created = creator.CreateSecondGame();
+			var created = ClassCreator.CreateSecondGame();
 
 			//Act
 			var expected = typeof(SecondGame);
@@ -85,7 +77,7 @@ namespace Project_Tests.Tests
 			//Arrange
 			var ui = new Mock<IUI>();
 			var fileManager = new Mock<IFileManager>();
-			var created = creator.CreateStatistics(ui.Object, fileManager.Object);
+			var created = ClassCreator.CreateStatistics(ui.Object, fileManager.Object);
 
 			//Act
 			var expected = typeof(StatisticCollection);
@@ -102,7 +94,7 @@ namespace Project_Tests.Tests
 			var ui = new Mock<IUI>();
 			var game = new Mock<IGameLogic>();
 			var statistics = new Mock<IStatistics>();
-			var created = creator.CreateGameController(ui.Object, game.Object, statistics.Object);
+			var created = ClassCreator.CreateGameController(ui.Object, game.Object, statistics.Object);
 
 			//Act
 			var expected = typeof(GameController);

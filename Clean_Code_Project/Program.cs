@@ -9,19 +9,18 @@ namespace Clean_Code_Project
 	{
 		public static void Main(string[] args)
 		{
-			ICreator creator = new ClassCreator();
 			string path = @"GameResults\\ShouldNeverBeAccessed.txt";
-			IFileManager fileManager = creator.CreateFileManager(path);
+			IFileManager fileManager = ClassCreator.CreateFileManager(path);
 			fileManager.SetPath(@"GameResults\\MooGame.txt");
-			IUI ui = creator.CreateUI();
-			IGameLogic game = creator.CreateMooGame();
-			IStatistics statistics = creator.CreateStatistics(ui, fileManager);
-			IGameController gameController = creator.CreateGameController(ui, game, statistics);
-			//Console.WriteLine(typeof(GameController).Assembly.GetName().Name);
+			IUI ui = ClassCreator.CreateUI();
+			IGameLogic game = ClassCreator.CreateMooGame();
+			IStatistics statistics = ClassCreator.CreateStatistics(ui, fileManager);
+			IGameController gameController = ClassCreator.CreateGameController(ui, game, statistics);
 			gameController.Run();
-			fileManager.SetPath(@"GameResults\\SecondGame.txt");
-			gameController.SetGame(creator.CreateSecondGame());
-			gameController.Run();
+
+			//fileManager.SetPath(@"GameResults\\SecondGame.txt");
+			//gameController.SetGame(ClassCreator.CreateSecondGame());
+			//gameController.Run();
 		}	
 	}
 }

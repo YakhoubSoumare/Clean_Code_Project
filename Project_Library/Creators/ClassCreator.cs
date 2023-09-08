@@ -11,38 +11,38 @@ using Project_Library.UIs;
 
 namespace Project_Library.Creators
 {
-	public class ClassCreator : ICreator
+	public static class ClassCreator
 	{
-		public IGameController CreateGameController(IUI ui, IGameLogic game, IStatistics statistics)
+		public static IGameController CreateGameController(IUI ui, IGameLogic game, IStatistics statistics)
 		{
 			return new GameController(ui, game, statistics);
 		}
 
-		public IFileManager CreateFileManager(string path)
+		public static IFileManager CreateFileManager(string path)
 		{
 			return new FileManager(path);
 		}
 
-		public IGameLogic CreateMooGame()
+		public static IGameLogic CreateMooGame()
 		{
 			return new MooGame();
 		}
-		public IGameLogic CreateSecondGame()
+		public static IGameLogic CreateSecondGame()
 		{
 			return new SecondGame();
 		}
 
-		public PlayerData CreatePlayerData(string name, int attemptsOfAllPlays)
+		public static PlayerData CreatePlayerData(string name, int attemptsOfAllPlays)
 		{
 			return new PlayerData(name, attemptsOfAllPlays);
 		}
 
-		public IStatistics CreateStatistics(IUI ui, IFileManager fileManager)
+		public static IStatistics CreateStatistics(IUI ui, IFileManager fileManager)
 		{
 			return new StatisticCollection(ui, fileManager);
 		}
 
-		public IUI CreateUI()
+		public static IUI CreateUI()
 		{
 			return new UI();
 		}
