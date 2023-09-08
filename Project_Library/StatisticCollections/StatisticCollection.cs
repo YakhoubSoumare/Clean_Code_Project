@@ -1,18 +1,19 @@
-﻿using Project_Library.PlayerDatas;
+﻿
+using Project_Library.PlayerDatas;
 using Project_Library.UIs;
-
-
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("GameController")]
 namespace Project_Library.StatisticCollections
 {
 	public class StatisticCollection : IStatistics
 	{
 		IUI ui;
-		internal List<PlayerData> PlayerDataCollection { get; private set; }
+		List<PlayerData> playerDataCollection;
 		IFileManager fileManager;
 		public StatisticCollection(IUI ui, IFileManager fileManager)
 		{
 			this.ui = ui;
-			PlayerDataCollection = new List<PlayerData>();
+			playerDataCollection = new List<PlayerData>();
 			this.fileManager = fileManager;
 		}
 
@@ -26,21 +27,21 @@ namespace Project_Library.StatisticCollections
 
 		public void ShowResult()
 		{
-			PlayerDataCollection.Clear();
-			PlayerDataCollection = ReadStream();
-			Sort(PlayerDataCollection);
+			playerDataCollection.Clear();
+			playerDataCollection = ReadStream();
+			Sort(playerDataCollection);
 			ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", "Player", "Games", "Average"));
-			PlayerDataCollection.ForEach(playerData =>
+			playerDataCollection.ForEach(playerData =>
 				ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", playerData.Name, playerData.NumberOfGames, playerData.Average())));
 		}
 
 		public void Show()
 		{
-			PlayerDataCollection.Clear();
-			PlayerDataCollection = ReadStream();
-			Sort(PlayerDataCollection);
+			playerDataCollection.Clear();
+			playerDataCollection = ReadStream();
+			Sort(playerDataCollection);
 			ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", "Player", "Games", "Average"));
-			PlayerDataCollection.ForEach(playerData =>
+			playerDataCollection.ForEach(playerData =>
 				ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", playerData.Name, playerData.NumberOfGames, playerData.Average())));
 
 			
@@ -59,17 +60,17 @@ namespace Project_Library.StatisticCollections
 					int playerDataIndex = GetPlayerIndex(name);
 					if (playerDataIndex < 0)
 					{
-						PlayerDataCollection.Add(new PlayerData(name, guesses));
+						playerDataCollection.Add(new PlayerData(name, guesses));
 					}
 					else
 					{
-						PlayerDataCollection[playerDataIndex].Update(guesses);
+						playerDataCollection[playerDataIndex].Update(guesses);
 					}
 				}
 				streamReader.Close();
 			}
 			
-			return PlayerDataCollection;
+			return playerDataCollection;
 		}
 
 		void Sort(List<PlayerData> playerDataCollection)
@@ -79,7 +80,7 @@ namespace Project_Library.StatisticCollections
 
 		int GetPlayerIndex(string name)
 		{
-			int indexOfPlayerData = PlayerDataCollection.FindIndex(x => x.Name == name);
+			int indexOfPlayerData = playerDataCollection.FindIndex(x => x.Name == name);
 			return indexOfPlayerData;
 		}
 	}

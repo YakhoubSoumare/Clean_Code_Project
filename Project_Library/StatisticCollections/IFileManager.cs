@@ -5,5 +5,6 @@ namespace Project_Library.StatisticCollections
 	{
 		StreamWriter StreamWriter();
 		StreamReader StreamReader();
+		void SetPath(string path);
 	}
 }

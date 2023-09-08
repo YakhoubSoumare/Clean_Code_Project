@@ -1,4 +1,5 @@
-﻿namespace Project_Library.StatisticCollections
+﻿
+namespace Project_Library.StatisticCollections
 {
 	public interface IStatistics
 	{

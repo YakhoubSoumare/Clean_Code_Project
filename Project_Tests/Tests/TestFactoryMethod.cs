@@ -52,13 +52,27 @@ namespace Project_Tests.Tests
 		}
 
 		[TestMethod]
-		public void CreateGameLogic_should_return_GameLogic()
+		public void CreateMooGame_should_return_GameLogic()
 		{
 			//Arrange
-			var created = creator.CreateGameLogic();
+			var created = creator.CreateMooGame();
 
 			//Act
 			var expected = typeof(MooGame);
+			var actual = created.GetType();
+
+			//Assert
+			Assert.AreEqual(expected, actual);
+		}
+
+		[TestMethod]
+		public void CreateSecondGame_should_return_SecondGame()
+		{
+			//Arrange
+			var created = creator.CreateSecondGame();
+
+			//Act
+			var expected = typeof(SecondGame);
 			var actual = created.GetType();
 
 			//Assert
@@ -82,13 +96,13 @@ namespace Project_Tests.Tests
 		}
 
 		[TestMethod]
-		public void CreateController_should_return_GameController()
+		public void CreateGameController_should_return_GameController()
 		{
 			//Arrange
 			var ui = new Mock<IUI>();
 			var game = new Mock<IGameLogic>();
 			var statistics = new Mock<IStatistics>();
-			var created = creator.CreateController(ui.Object, game.Object, statistics.Object);
+			var created = creator.CreateGameController(ui.Object, game.Object, statistics.Object);
 
 			//Act
 			var expected = typeof(GameController);

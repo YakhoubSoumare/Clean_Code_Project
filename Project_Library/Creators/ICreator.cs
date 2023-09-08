@@ -7,8 +7,9 @@ namespace Project_Library.Creators
 {
 	public interface ICreator
 	{
-		IController CreateController(IUI ui, IGameLogic game, IStatistics statistics);
-		IGameLogic CreateGameLogic();
+		IGameController CreateGameController(IUI ui, IGameLogic game, IStatistics statistics);
+		IGameLogic CreateMooGame();
+		IGameLogic CreateSecondGame();
 		PlayerData CreatePlayerData(string name, int attemptsOfAllPlays);
 		IFileManager CreateFileManager(string path);
 		IStatistics CreateStatistics(IUI ui, IFileManager fileManager);

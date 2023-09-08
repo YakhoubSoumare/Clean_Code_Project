@@ -9,6 +9,11 @@ namespace Project_Library.StatisticCollections
 			this.path = path;
 		}
 
+		public void SetPath(string path)
+		{
+			this.path = path;
+		}
+
 		public StreamWriter StreamWriter()
 		{
 			return new StreamWriter(path, append: true);

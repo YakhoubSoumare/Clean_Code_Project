@@ -3,7 +3,7 @@ using Project_Library.StatisticCollections;
 
 namespace Project_Library.Logic_And_Controller
 {
-	public class GameController : IController
+	public class GameController : IGameController
 	{
 		IGameLogic game;
 		IUI ui;
@@ -22,12 +22,18 @@ namespace Project_Library.Logic_And_Controller
 			this.statistics = statistics;
 			this.game = game;
 		}
+		
 
 		public void Run()
-		{
+		{	
 			playOn = true;
 			AskAndDisplayUserName();
 			Play();
+		}
+
+		public void SetGame(IGameLogic game)
+		{
+			this.game = game;
 		}
 
 		void AskAndDisplayUserName()
