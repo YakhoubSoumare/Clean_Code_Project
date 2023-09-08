@@ -48,6 +48,7 @@ namespace Project_Library.Logic_And_Controller
 			
 			do
 			{
+				attempts = 0;
 				Start();
 				Guess();
 				SaveResult();
