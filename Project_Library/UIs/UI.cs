@@ -13,9 +13,5 @@
 			return output;
 		}
 
-		public void Exit()
-		{
-			System.Environment.Exit(0);
-		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace Project_Library.Logic_And_Controller
+﻿using Project_Library.Logic;
+
+namespace Project_Library.Controller
 {
     public interface IGameStrategy
     {

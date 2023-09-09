@@ -3,7 +3,6 @@
 	public interface IUI
 	{
 		void Display(string message);
-		void Exit();
 		string Input();
 	}
 }

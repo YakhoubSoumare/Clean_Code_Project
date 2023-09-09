@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_Library.Logic_And_Controller
+namespace Project_Library.Logic
 {
 	public class SecondGame : IGameLogic
 	{

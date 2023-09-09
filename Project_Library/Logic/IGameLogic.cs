@@ -1,4 +1,4 @@
-﻿namespace Project_Library.Logic_And_Controller
+﻿namespace Project_Library.Logic
 {
 	public interface IGameLogic
 	{

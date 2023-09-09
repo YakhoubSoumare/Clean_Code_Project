@@ -1,5 +1,6 @@
 ﻿
-using Project_Library.Logic_And_Controller;
+using Project_Library.Controller;
+using Project_Library.Logic;
 using Project_Tests.CreatedClassForTest;
 
 namespace Project_Tests.Tests

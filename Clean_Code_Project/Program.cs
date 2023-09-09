@@ -1,7 +1,7 @@
 ﻿using Project_Library.UIs;
-using Project_Library.Logic_And_Controller;
+using Project_Library.Controller;
 using Project_Library.StatisticCollections;
-using Project_Library.Creators;
+using Project_Library.Factory_and_Creators;
 
 namespace Clean_Code_Project
 {
@@ -9,18 +9,12 @@ namespace Clean_Code_Project
 	{
 		public static void Main(string[] args)
 		{
-			string path = @"GameResults\\ShouldNeverBeAccessed.txt";
-			IFileManager fileManager = ClassCreator.CreateFileManager(path);
-			fileManager.SetPath(@"GameResults\\MooGame.txt");
-			IUI ui = ClassCreator.CreateUI();
-			IGameLogic game = ClassCreator.CreateMooGame();
-			IStatistics statistics = ClassCreator.CreateStatistics(ui, fileManager);
-			IGameController gameController = ClassCreator.CreateGameController(ui, game, statistics);
+			var fileManager = ClassCreator.CreateFileManager();
+			var ui = ClassCreator.CreateUI();
+			var game = ClassCreator.CreateMooGame();
+			var statistics = ClassCreator.CreateStatistics(ui, fileManager);
+			var gameController = ClassCreator.CreateGameController(ui, game, statistics);
 			gameController.Run();
-
-			//fileManager.SetPath(@"GameResults\\SecondGame.txt");
-			//gameController.SetGame(ClassCreator.CreateSecondGame());
-			//gameController.Run();
 		}	
 	}
 }

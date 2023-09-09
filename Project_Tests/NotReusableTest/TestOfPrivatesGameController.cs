@@ -2,9 +2,10 @@
 
 using Moq;
 using Project_Library.UIs;
-using Project_Library.Logic_And_Controller;
+using Project_Library.Controller;
 using System.Reflection;
 using Project_Library.StatisticCollections;
+using Project_Library.Logic;
 
 namespace Project_Tests.NotReusableTest
 {

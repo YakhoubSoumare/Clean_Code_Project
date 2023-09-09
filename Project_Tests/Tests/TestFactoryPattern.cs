@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Project_Library.Creators;
-using Project_Library.Logic_And_Controller;
+using Project_Library.Factory_and_Creators;
+using Project_Library.Controller;
 using Project_Library.StatisticCollections;
 using Project_Library.UIs;
+using Project_Library.Logic;
 
 namespace Project_Tests.Tests
 {
-	[TestClass]
+    [TestClass]
 	public class TestFactoryPattern
 	{
 		[TestMethod]
 		public void FileManager_should_return_FileManager()
 		{
-			string path = "";
 			//Arrange
-			var created = ClassCreator.CreateFileManager(path);
+			var created = ClassCreator.CreateFileManager();
 
 			//Act
 			var expected = typeof(FileManager);

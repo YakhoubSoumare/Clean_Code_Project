@@ -1,9 +1,9 @@
 ﻿using Moq;
-using Project_Library.Logic_And_Controller;
+using Project_Library.Logic;
 
 namespace Project_Tests.Tests
 {
-	[TestClass]
+    [TestClass]
 	public class GameTest
 	{
 		[TestMethod]

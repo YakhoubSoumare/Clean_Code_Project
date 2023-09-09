@@ -44,10 +44,10 @@ namespace Project_Tests.Tests
 			int testAttempts = 11;
 			var fileManagerObject = new Mock<IFileManager>();
 			var fakeFilePath = new MemoryStream();
-			fileManagerObject.Setup(x => x.StreamReader()).Returns(new StreamReader(fakeFilePath));
+			fileManagerObject.Setup(x => x.StreamReader(It.IsAny<string>())).Returns(new StreamReader(fakeFilePath));
 			fileManagerObject.Setup(o => o.StreamWriter()).Returns(new StreamWriter(fakeFilePath));
 
-			var reader = fileManagerObject.Object.StreamReader();
+			var reader = fileManagerObject.Object.StreamReader(It.IsAny<string>());
 			var writer = fileManagerObject.Object.StreamWriter();
 
 

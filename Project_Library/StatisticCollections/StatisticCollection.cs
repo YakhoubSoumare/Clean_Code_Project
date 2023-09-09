@@ -1,8 +1,9 @@
 ﻿
+using Project_Library.Observer_Pattern_Pillars;
 using Project_Library.PlayerDatas;
 using Project_Library.UIs;
+using System.IO;
 using System.Runtime.CompilerServices;
-[assembly: InternalsVisibleTo("GameController")]
 namespace Project_Library.StatisticCollections
 {
 	public class StatisticCollection : IStatistics
@@ -17,6 +18,16 @@ namespace Project_Library.StatisticCollections
 			this.fileManager = fileManager;
 		}
 
+		public IFileManager GetFileManager()
+		{
+			return fileManager.GetClass();
+		}
+
+		public void SetFileManager(IFileManager fileManager)
+		{
+			this.fileManager = fileManager;
+		}
+
 		public void Store(string name, int attempts)
 		{
 			using (var streamWriter = fileManager.StreamWriter())
@@ -25,51 +36,45 @@ namespace Project_Library.StatisticCollections
 			}
 		}
 
-		public void ShowResult()
+		public void Show(string directories)
 		{
+			string files = directories;
 			playerDataCollection.Clear();
-			playerDataCollection = ReadStream();
+			playerDataCollection = ReadStream(files);
 			Sort(playerDataCollection);
 			ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", "Player", "Games", "Average"));
 			playerDataCollection.ForEach(playerData =>
 				ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", playerData.Name, playerData.NumberOfGames, playerData.Average())));
+	
 		}
 
-		public void Show()
+		List<PlayerData> ReadStream(string folder)
 		{
-			playerDataCollection.Clear();
-			playerDataCollection = ReadStream();
-			Sort(playerDataCollection);
-			ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", "Player", "Games", "Average"));
-			playerDataCollection.ForEach(playerData =>
-				ui.Display(string.Format("{0,-20}{1,5:D}{2,9:F2}", playerData.Name, playerData.NumberOfGames, playerData.Average())));
-
-			
-		}
-
-		List<PlayerData> ReadStream()
-		{
-			using (var streamReader = fileManager.StreamReader())
+			string[] files = Directory.GetFiles(folder);
+			foreach (var file in files)
 			{
-				string lineFromFile = string.Empty;
-				while ((lineFromFile = streamReader.ReadLine()) != null)
+				using (var streamReader = fileManager.StreamReader(file))
 				{
-					string[] nameAndScore = lineFromFile.Split(new string[] { "#&#" }, StringSplitOptions.None);
-					string name = nameAndScore[0];
-					int guesses = Convert.ToInt32(nameAndScore[1]);
-					int playerDataIndex = GetPlayerIndex(name);
-					if (playerDataIndex < 0)
+					string lineFromFile = string.Empty;
+					while ((lineFromFile = streamReader.ReadLine()) != null)
 					{
-						playerDataCollection.Add(new PlayerData(name, guesses));
+						string[] nameAndScore = lineFromFile.Split(new string[] { "#&#" }, StringSplitOptions.None);
+						string name = nameAndScore[0];
+						int guesses = Convert.ToInt32(nameAndScore[1]);
+						int playerDataIndex = GetPlayerIndex(name);
+						if (playerDataIndex < 0)
+						{
+							playerDataCollection.Add(new PlayerData(name, guesses));
+						}
+						else
+						{
+							playerDataCollection[playerDataIndex].Update(guesses);
+						}
 					}
-					else
-					{
-						playerDataCollection[playerDataIndex].Update(guesses);
-					}
+					streamReader.Close();
 				}
-				streamReader.Close();
 			}
-			
+						
 			return playerDataCollection;
 		}
 
